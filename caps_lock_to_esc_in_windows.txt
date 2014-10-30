@@ -1,0 +1,5 @@
+Use SharpKeys 3.5!
+
+http://www.randyrants.com/2011/12/sharpkeys_35.html
+
+Once that app is installed and running, remapping CAPS LOCK to ESC is a cinch. Restart after the registry update occurs and boom!
