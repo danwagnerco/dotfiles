@@ -62,9 +62,10 @@ colorscheme solarized
 
 " Settings
 syntax on
-set relativenumber
-set number
-set smarttab
-set splitbelow
-set splitright
-set clipboard=unnamed
+set relativenumber    " show relative number everywhere else
+set number            " show line number on active line
+set smarttab          " handle tabs correctly (as spaces)
+set splitbelow        " new horizontal splits show up in bottom window
+set splitright        " new vertical splits show up in the right window
+set clipboard=unnamed " yanks from vim can be pasted into other programs
+set laststatus=2      " vim-airline always shows up
