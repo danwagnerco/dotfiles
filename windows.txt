@@ -81,12 +81,9 @@ set splitbelow
 set splitright
 set clipboard=unnamed
 set laststatus=2
-set expandtab
-set tabstop=2
-set softtabstop=2
 
 " Airline-specific settings
-set guifont=Powerline\ Consolas:h10:b
-set encoding=utf-8
-let g:airline_powerline_fonts=1
+" set guifont=Powerline\ Consolas:h10:b
+" set encoding=utf-8
+" let g:airline_powerline_fonts=1
 " let g:airline_theme = 'tomorrow-night'
