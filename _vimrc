@@ -81,9 +81,13 @@ set splitbelow
 set splitright
 set clipboard=unnamed
 set laststatus=2
+set scrolloff=3
 
 " Airline-specific settings
 " set guifont=Powerline\ Consolas:h10:b
 " set encoding=utf-8
 " let g:airline_powerline_fonts=1
 " let g:airline_theme = 'tomorrow-night'
+
+" Leader customization
+let mapleader=" "
