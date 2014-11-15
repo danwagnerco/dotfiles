@@ -40,8 +40,12 @@ set splitbelow
 set splitright
 set clipboard=unnamed
 set laststatus=2
+set scrolloff=3
 
 " Airline-specific jams
-set guifont=Menlo\ Regular:h12
-set encoding=utf-8
+" set guifont=Menlo\ Regular:h12
+" set encoding=utf-8
 " let g:airline_powerline_fonts=1
+
+" Leader customization
+let mapleader=" "
