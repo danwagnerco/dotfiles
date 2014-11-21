@@ -49,3 +49,13 @@ set scrolloff=3
 
 " Leader customization
 let mapleader=" "
+
+" Configure tabstop softtabstop and expand or not by filetype
+if has("autocmd")
+  filetype on
+
+  autocmd FileType vim setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
+
+endif
