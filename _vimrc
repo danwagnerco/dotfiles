@@ -62,10 +62,6 @@ Plugin 'tomasr/molokai'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" Configure expanding (or not) for file types
-au BufRead,BufNewFile *.rb set expandtab
-au BufRead,BufNewFile *.py set expandtab
-
 " Use the colorscheme from above
 " set background=dark
 " colorscheme solarized
@@ -85,9 +81,20 @@ set scrolloff=3
 
 " Airline-specific settings
 " set guifont=Powerline\ Consolas:h10:b
+" set guifont=Meslo\ LG\ M\ for\ Powerline:h9
 " set encoding=utf-8
 " let g:airline_powerline_fonts=1
 " let g:airline_theme = 'tomorrow-night'
 
 " Leader customization
 let mapleader=" "
+
+" Configure tabstop softtabstop and expand or not by filetype
+if has("autocmd")
+  filetype on
+
+  autocmd FileType vim setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
+
+endif
