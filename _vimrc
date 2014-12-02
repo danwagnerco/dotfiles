@@ -77,7 +77,7 @@ set splitbelow
 set splitright
 set clipboard=unnamed
 set laststatus=2
-set scrolloff=3
+set scrolloff=5
 
 " Airline-specific settings
 " set guifont=Powerline\ Consolas:h10:b
