@@ -41,6 +41,7 @@ set splitright
 set clipboard=unnamed
 set laststatus=2
 set scrolloff=5
+let g:netrw_liststyle=3
 
 " Airline-specific jams
 " set guifont=Menlo\ Regular:h12
