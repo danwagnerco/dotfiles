@@ -4,7 +4,7 @@ Welcome to my dotfiles!
 > Top down, chrome spinnin'.<br/>
 > -- Pusha T
 
-### shortcuts
+### `shortcuts`
 This folder contains some handy batch files that I use to handle common tasks, like:
   - Git configuration, when switching from work to personal Github accounts
   - `uru auto` to default to my user-specific Ruby version
