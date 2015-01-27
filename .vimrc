@@ -61,3 +61,6 @@ if has("autocmd")
   autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
 
 endif
+
+" Force Vim to read md files as markdown, not modula2
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
