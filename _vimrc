@@ -109,3 +109,4 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " Leader customization
 let mapleader=" "
 map <Leader>pt :Dispatch py.test %<CR>
+map <Leader>rs :Dispatch rspec %<CR>
