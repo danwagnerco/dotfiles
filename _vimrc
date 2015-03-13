@@ -78,8 +78,8 @@ set splitright
 set clipboard=unnamed
 set laststatus=2
 set scrolloff=5
-set textwidth=80
-set colorcolumn=+1
+" set textwidth=80
+" set colorcolumn=+1
 set backupdir=%HOMEPATH%/temp  " Do not clutter directory with swap
 set directory=%HOMEPATH%/temp  " and temp files
 let g:netrw_liststyle=3
