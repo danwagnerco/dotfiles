@@ -83,6 +83,7 @@ set scrolloff=5
 set backupdir=%HOMEPATH%/temp  " Do not clutter directory with swap
 set directory=%HOMEPATH%/temp  " and temp files
 let g:netrw_liststyle=3
+set colorcolumn=80
 
 " Airline-specific settings
 " set guifont=Powerline\ Consolas:h10:b
