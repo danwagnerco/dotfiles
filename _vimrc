@@ -83,7 +83,7 @@ set scrolloff=5
 set backupdir=%HOMEPATH%/temp  " Do not clutter directory with swap
 set directory=%HOMEPATH%/temp  " and temp files
 let g:netrw_liststyle=3
-set colorcolumn=80
+" set colorcolumn=80
 
 " Airline-specific settings
 " set guifont=Powerline\ Consolas:h10:b
@@ -101,6 +101,10 @@ if has("autocmd")
   autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
   autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
   auto ms FileType css setlocal ts=2 sts=2 sw=2 expandtab
+  
+  " These highlight lines that extend past 80 chars
+  autocmd BufEnter * highlight OverLength ctermbg=red ctermbg=white guibg=#592929
+  autocmd BufEnter * match OverLength /\%>80v.\+/
 
 endif
 
