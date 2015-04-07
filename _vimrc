@@ -92,6 +92,10 @@ let g:netrw_liststyle=3
 " let g:airline_powerline_fonts=1
 " let g:airline_theme = 'tomorrow-night'
 
+" Specify .md files as markdown
+au BufRead,BufNewFile *.md setlocal ft=markdown
+
+
 " Configure tabstop softtabstop and expand or not by filetype
 if has("autocmd")
   filetype on
