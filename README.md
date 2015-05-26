@@ -4,6 +4,9 @@ Welcome to my dotfiles!
 > Top down, chrome spinnin'.<br/>
 > -- Pusha T
 
+### `clink`
+This folder holds lua scripts for use with [Clink](http://mridgers.github.io/clink/) on Windows machines.
+
 ### `shortcuts`
 This folder contains some handy batch files that I use to handle common tasks, like:
   - Git configuration, when switching from work to personal Github accounts
@@ -23,3 +26,13 @@ Dayum! That handsome devil is my work and personal laptop Vim configuration, for
 
 ### `.vimrc`
 Whaddup? That lil' guy is my home desktop Vim configuration, for using macVim on Mac OS X.
+
+### Downloading
+Don't be a dingus, use [cURL](http://curl.haxx.se/) to download the files straight away!
+
+```
+> cd directory_where_you_want_the_file
+> curl -k -O raw_github_user_content_link
+```
+
+Boom!
