@@ -55,7 +55,7 @@ Plugin 'vim-ruby/vim-ruby'
 
 " Colorschemes
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim'}
+Plugin 'danwagnerco/tomorrow-theme', {'rtp': 'vim'}
 Plugin 'tomasr/molokai'
 
 " All of your Plugins must be added before the following line
@@ -95,7 +95,6 @@ let g:netrw_liststyle=3
 " Specify .md files as markdown
 au BufRead,BufNewFile *.md setlocal ft=markdown
 
-
 " Configure tabstop softtabstop and expand or not by filetype
 if has("autocmd")
   filetype on
@@ -109,11 +108,19 @@ if has("autocmd")
   " These highlight lines that extend past 80 chars
   autocmd BufEnter * highlight OverLength ctermbg=red ctermbg=white guibg=#592929
   autocmd BufEnter * match OverLength /\%>80v.\+/
-
+  
+  " Force Vim to read md files as markdown, not modula2
+  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 endif
 
-" Force Vim to read md files as markdown, not modula2
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" ConEmu
+if !empty($CONEMUBUILD)
+  set termencoding=utf8
+  set term=xterm
+  set t_Co=256
+  let &t_AB="\e[48;5;%dm"
+  let &t_AF="\e[38;5;%dm"
+endif
 
 " Leader customization
 let mapleader=" "
