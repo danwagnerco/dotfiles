@@ -1,3 +1,10 @@
+Name: {github vsplit}
+Task Parameters: /dir "C:\github"
+Commands: >""C:\users\daniel.wagner\Git\bin\sh.exe" --login -i"
+""C:\users\daniel.wagner\Git\bin\sh.exe" --login -i -cur_console:slTVn"
+
+# EVERYTHING BELOW IS FOR CMD
+
 Name: {github}
 Task Parameters: /dir "C:\github"
 Commands: cmd /k conemu-start
