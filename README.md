@@ -4,6 +4,9 @@ Welcome to my dotfiles!
 > Top down, chrome spinnin'.<br/>
 > -- Pusha T
 
+### `bash`
+Handy bash commands and scripts.
+
 ### `clink`
 This folder holds lua scripts for use with [Clink](http://mridgers.github.io/clink/) on Windows machines.
 
