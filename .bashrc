@@ -3,6 +3,7 @@ alias gvim='/c/Users/danie_000/vim/vim74/gvim.exe'
 alias vim='/c/Users/danie_000/vim/vim74/vim.exe'
 alias ls='ls -hF --color'
 alias ZZ='exit'
+alias gs='git status'
 
 # Home laptop functions
 function gl () {
