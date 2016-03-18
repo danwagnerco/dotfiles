@@ -1,0 +1,22 @@
+{github vsplit}
+Task parameters:
+/dir "C:\github"
+
+Task:
+>"set PROMPT=$E[32m$E]9;8;"USERNAME"$E\@$E]9;8;"COMPUTERNAME"$E\$S$E[92m$P$E[90m$_$E[90m$$$E[m$S" & cmd.exe
+
+set PROMPT=$E[32m$E]9;8;"USERNAME"$E\@$E]9;8;"COMPUTERNAME"$E\$S$E[92m$P$E[90m$_$E[90m$$$E[m$S & cmd.exe -cur_console:slTVn
+
+{github}
+Task parameters:
+/dir "C:\github"
+
+Task:
+>"set PROMPT=$E[32m$E]9;8;"USERNAME"$E\@$E]9;8;"COMPUTERNAME"$E\$S$E[92m$P$E[90m$_$E[90m$$$E[m$S" & cmd.exe
+
+{vimrc}
+Task parameters:
+/dir "C:\Users\daniel.wagner\vim"
+
+Task:
+>"set PROMPT=$E[32m$E]9;8;"USERNAME"$E\@$E]9;8;"COMPUTERNAME"$E\$S$E[92m$P$E[90m$_$E[90m$$$E[m$S" & cmd.exe
