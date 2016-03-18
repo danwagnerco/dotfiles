@@ -1,4 +1,4 @@
--- belongs here -> C:\Users\<your_user_name>\AppData\Local\clink\git_checkout.lua
+-- belongs here -> C:\Users\<your_user_name>\AppData\Local\clink\git_prompt_filter.lua
 function git_prompt_filter()
     for line in io.popen("git branch 2>nul"):lines() do
         local m = line:match("%* (.+)$")
