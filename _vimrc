@@ -85,6 +85,11 @@ set directory=%HOMEPATH%/temp  " and temp files
 let g:netrw_liststyle=3
 " set colorcolumn=80
 
+" ConEmu conflict with Vim check out
+" Github issue https://github.com/Maximus5/ConEmu/issues/641
+inoremap <Char-0x07F> <BS>
+nnoremap <Char-0x07F> <BS>
+
 " Airline-specific settings
 " set guifont=Powerline\ Consolas:h10:b
 " set guifont=Meslo\ LG\ M\ for\ Powerline:h9
