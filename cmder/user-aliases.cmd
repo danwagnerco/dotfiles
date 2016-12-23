@@ -15,3 +15,4 @@ vi=vim $*
 cmderr=cd /d "%CMDER_ROOT%"
 vim=gvim $*
 gll=git log -10 --pretty=format:"%C(yellow)%h %C(red)%cr %C(green)%cn %C(white)%s"
+s=git status
