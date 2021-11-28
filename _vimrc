@@ -1,4 +1,8 @@
-set nocompatible
+" vim 8.2 install on dwco02
+" create -> C:\Users\dan\vimfiles\autoload because autoload is not there to start
+" cd C:\Users\dan\vimfiles\autoload
+" curl https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim --output plug.vim
+" copy the contents of this file -> C:\Users\dan\_vimrc
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
@@ -14,59 +18,45 @@ function MyDiff()
   if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
   let arg3 = v:fname_out
   if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
   if $VIMRUNTIME =~ ' '
     if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
+      if empty(&shellxquote)
+        let l:shxq_sav = ''
+        set shellxquote&
+      endif
+      let cmd = '"' . $VIMRUNTIME . '\diff"'
     else
       let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
     endif
   else
     let cmd = $VIMRUNTIME . '\diff'
   endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+  if exists('l:shxq_sav')
+    let &shellxquote=l:shxq_sav
+  endif
 endfunction
 
-" Begin Vundle
-filetype off
+" Plug
+call plug#begin()
+Plug 'bling/vim-airline'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-sensible'
+Plug 'danwagnerco/tomorrow-theme', {'rtp': 'vim'}
+Plug 'zenorocha/dracula-theme', {'rtp': 'vim'}
+Plug 'tomasr/molokai'
+call plug#end()
 
-" Set the runtime path to include Vundle and initialize
-set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
-call vundle#begin('$VIM/vimfiles/bundle')
-
-" Let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" Bundles
-Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-projectionist'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-rake'
-Plugin 'tpope/vim-sleuth'
-Plugin 'tpope/vim-vinegar'
-Plugin 'vim-ruby/vim-ruby'
-
-" Colorschemes
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'danwagnerco/tomorrow-theme', {'rtp': 'vim'}
-Plugin 'tomasr/molokai'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" Use the colorscheme from above
-" set background=dark
-" colorscheme solarized
-" colorscheme Tomorrow-Night-Bright
-" colorscheme Molokai
+" Use colorscheme from package above
+colorscheme Tomorrow-Night-Bright
 
 " Settings
 syntax on
@@ -80,22 +70,20 @@ set laststatus=2
 set scrolloff=5
 " set textwidth=80
 " set colorcolumn=+1
-set backupdir=%HOMEPATH%/temp  " Do not clutter directory with swap
-set directory=%HOMEPATH%/temp  " and temp files
+set backupdir=c:\tmp  " Do not clutter directory with swap
+set directory=c:\tmp  " and temp files
+set noundofile        " as well as undo files
+set noerrorbells visualbell t_vb=
 let g:netrw_liststyle=3
 " set colorcolumn=80
+set guifont=Powerline\ Consolas:h10
+set encoding=utf-8
+let g:airline_powerline_fonts=1
 
 " ConEmu conflict with Vim check out
 " Github issue https://github.com/Maximus5/ConEmu/issues/641
 inoremap <Char-0x07F> <BS>
 nnoremap <Char-0x07F> <BS>
-
-" Airline-specific settings
-" set guifont=Powerline\ Consolas:h10:b
-" set guifont=Meslo\ LG\ M\ for\ Powerline:h9
-" set encoding=utf-8
-" let g:airline_powerline_fonts=1
-" let g:airline_theme = 'tomorrow-night'
 
 " Specify .md files as markdown
 au BufRead,BufNewFile *.md setlocal ft=markdown
@@ -108,23 +96,16 @@ if has("autocmd")
   autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
   autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
-  auto ms FileType css setlocal ts=2 sts=2 sw=2 expandtab
-  
-  " These highlight lines that extend past 80 chars
-  autocmd BufEnter * highlight OverLength ctermbg=red ctermbg=white guibg=#592929
-  autocmd BufEnter * match OverLength /\%>80v.\+/
-  
-  " Force Vim to read md files as markdown, not modula2
-  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-endif
+  autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType elm setlocal ts=4 sts=4 sw=4 expandtab
 
-" ConEmu
-if !empty($CONEMUBUILD)
-  set termencoding=utf8
-  set term=xterm
-  set t_Co=256
-  let &t_AB="\e[48;5;%dm"
-  let &t_AF="\e[38;5;%dm"
+  " These highlight lines that extend past 80 chars
+  " autocmd BufEnter * highlight OverLength ctermbg=red guibg=#592929
+  " autocmd BufEnter * match OverLength /\%>80v.\+/
+
+  " Turn off bells
+  autocmd GUIEnter * set visualbell t_vb=
+
 endif
 
 " Leader customization
