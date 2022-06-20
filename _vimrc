@@ -115,5 +115,7 @@ map <Leader>pta :Dispatch py.test<cr>
 map <Leader>rss :Dispatch bundle exec rspec %<cr>
 map <Leader>rsa :Dispatch bundle exec rspec ./spec<cr>
 map <Leader>c :ccl<cr>
-map <Leader>gs :Gstatus<cr>
-map <Leader>gc :Gcommit<cr>
+" map <Leader>gs :Gstatus<cr> old vim-fugitive, updated to simply :Git
+map <Leader>gs :Git<cr>
+" map <Leader>gc :Gcommit<cr> old vim-fugitive, updated to :Git commit
+map <Leader>gc :Git commit<cr>
