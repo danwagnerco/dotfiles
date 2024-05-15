@@ -2,7 +2,10 @@
 " create -> C:\Users\dan\vimfiles\autoload because autoload is not there to start
 " cd C:\Users\dan\vimfiles\autoload
 " curl https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim --output plug.vim
-" copy the contents of this file -> C:\Users\dan\_vimrc
+" curl https://raw.githubusercontent.com/danwagnerco/dotfiles/master/_vimrc --output _vimrc
+" download https://github.com/runsisi/consolas-font-for-powerline/blob/master/Powerline%20Consolas.ttf
+" (just download the file to desktop double-click install then delete)
+" vim _vimrc then :PlugInstall
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
