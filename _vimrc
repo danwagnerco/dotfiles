@@ -42,7 +42,8 @@ endfunction
 
 " Plug
 call plug#begin()
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
@@ -56,10 +57,13 @@ Plug 'tpope/vim-sensible'
 Plug 'danwagnerco/tomorrow-theme', {'rtp': 'vim'}
 Plug 'zenorocha/dracula-theme', {'rtp': 'vim'}
 Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
 call plug#end()
 
 " Use colorscheme from package above
-colorscheme Tomorrow-Night-Bright
+" colorscheme Tomorrow-Night-Bright
+set background=light
+colorscheme solarized
 
 " Settings
 syntax on
@@ -79,7 +83,8 @@ set noundofile        " as well as undo files
 set noerrorbells visualbell t_vb=
 let g:netrw_liststyle=3
 " set colorcolumn=80
-set guifont=Powerline\ Consolas:h10
+" set guifont=Powerline\ Consolas:h10
+set guifont=JetBrains\ Mono:h9
 set encoding=utf-8
 let g:airline_powerline_fonts=1
 
