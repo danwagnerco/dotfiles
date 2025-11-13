@@ -1,0 +1,38 @@
+# Needs to be renamed to .bashrc and placed at ~/.bashrc
+
+# Add to the bottom of the .bashrc file to config WSL environment
+# kimi
+# function wrapper that uses Moonshot AI's Kimi model with Claude Code CLI
+function kimi() {
+    (
+        export ANTHROPIC_BASE_URL=https://api.moonshot.ai/anthropic
+        export ANTHROPIC_AUTH_TOKEN=<your_token_here>
+        export ANTHROPIC_MODEL=kimi-k2-thinking
+        export ANTHROPIC_SMALL_FAST_MODEL=kimi-k2-thinking
+        claude "$@"
+    )
+}
+
+# Environment variables
+export UW_TOKEN="<your_token_here>"
+export UW_API_TOKEN="<your_token_here>"
+export UW_EMPLOYEE_KEY="<your_token_here>"
+export TIINGO_API_TOKEN="<your_token_here>"
+export UW_DEMO_TOKEN="<your_token_here>"
+export UW_ASKSHERLOCK_TOKEN="<your_token_here>"
+export UW_ABYAN_TOKEN="<your_token_here>"
+export DUCKDB_KEY_ID="<your_token_here>"
+export DUCKDB_SECRET="<your_token_here>"
+export OPEN_FIGI_TOKEN="<your_token_here>"
+export GH_TOKEN="<your_token_here>"
+
+# Path management
+export PATH="/home/danwagnerco/.local/bin:$PATH"
+export PATH="/opt/SQLiteStudio:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+alias claude="/home/danwagnerco/.claude/local/claude"
+. "$HOME/.cargo/env"
