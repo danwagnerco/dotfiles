@@ -9,9 +9,14 @@ function kimi() {
         export ANTHROPIC_AUTH_TOKEN=<your_token_here>
         export ANTHROPIC_MODEL=kimi-k2-thinking
         export ANTHROPIC_SMALL_FAST_MODEL=kimi-k2-thinking
-        claude "$@"
+        /home/danwagnerco/.claude/local/claude "$@"
     )
 }
+
+# Dan's aliases
+alias eee="eza -l -a -h --group-directories-first"
+alias gll="git log --oneline -10"
+alias gss="git status"
 
 # Environment variables
 export UW_TOKEN="<your_token_here>"
