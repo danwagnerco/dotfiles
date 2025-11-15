@@ -4,6 +4,15 @@ Welcome to my dotfiles!
 > Top down, chrome spinnin'.<br/>
 > -- Pusha T
 
+### `powershell`
+Powershell configuration file for aliases etc., details:
+```
+PS C:\github> $PROFILE
+C:\Users\{username}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+PS C:\github> . $PROFILE # source the updated config file
+PS C:\github>
+```
+
 ### `bash`
 Handy bash commands and scripts.
 
