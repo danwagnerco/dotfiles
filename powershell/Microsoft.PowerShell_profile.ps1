@@ -1,16 +1,25 @@
 # Import modules
 Import-Module posh-git
 
-# Configure posh-git prompt and settings
+# Disable posh-git's default prompt components (we're building our own)
+$GitPromptSettings.DefaultPromptPath = ''
+$GitPromptSettings.DefaultPromptPrefix = ''
+$GitPromptSettings.DefaultPromptSuffix = ''
+$GitPromptSettings.DefaultPromptBeforeSuffix = ''
+$GitPromptSettings.DefaultPromptWriteStatusFirst = $false
+
+# Configure posh-git git status display
 $GitPromptSettings.EnableFileStatus = $true
 $GitPromptSettings.EnableStashStatus = $true
 $GitPromptSettings.ShowStatusWhenZero = $false
 $GitPromptSettings.AutoRefreshIndex = $true
 $GitPromptSettings.BeforeStatus = "["
-$GitPromptSettings.AfterStatus = "] "
-$GitPromptSettings.DefaultPromptSuffix = ""
+$GitPromptSettings.AfterStatus = "]"
 $GitPromptSettings.BranchBehindAndAheadDisplay = "Compact"
 $GitPromptSettings.RepositoriesInWhichToDisableFileStatus = @()
+
+# Prevent Python venv from modifying the prompt (we handle it ourselves)
+$env:VIRTUAL_ENV_DISABLE_PROMPT = "1"
 
 # Configure PSReadLine for intuitive autocomplete with both history and path completion
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
@@ -41,34 +50,51 @@ function gll {
     git log --oneline -10 @args
 }
 
-# Custom multi-line prompt function
+function pea {
+    # Poetry Environment Activate
+    $activateCommand = poetry env activate
+    if ($activateCommand) {
+        Invoke-Expression $activateCommand
+    } else {
+        Write-Host "No Poetry virtual environment found in this project" -ForegroundColor Red
+    }
+}
+
+function ped {
+    # Poetry Environment Deactivate
+    # The 'deactivate' function is injected into the shell by the activation script
+    if (Get-Command deactivate -ErrorAction SilentlyContinue) {
+        deactivate
+    } else {
+        Write-Host "No active virtual environment to deactivate" -ForegroundColor Yellow
+    }
+}
+
+# Custom multi-line prompt
 function prompt {
     $realLASTEXITCODE = $LASTEXITCODE
     
-    # Line 1: Virtual Environment (if active)
-    if ($env:VIRTUAL_ENV) {
-        $venvName = Split-Path $env:VIRTUAL_ENV -Leaf
-        Write-Host "($venvName) " -NoNewline -ForegroundColor Green
+    # Line 1A: Current Directory (last 3 segments)
+    $currentPath = $executionContext.SessionState.Path.CurrentLocation.Path
+    $pathParts = $currentPath.Split([IO.Path]::DirectorySeparatorChar)
+    $displayPath = if ($pathParts.Count -gt 3) {
+        "...\" + ($pathParts[-3..-1] -join '\')
+    } else {
+        $currentPath
     }
-    
-    # # Line 1: Current Directory (abbreviated)
-    # $currentPath = $executionContext.SessionState.Path.CurrentLocation.Path
-    
-    # # Option B: Show only last 2 path segments
-    # $pathParts = $currentPath.Split([IO.Path]::DirectorySeparatorChar)
-    # $displayPath = if ($pathParts.Count -gt 2) {
-    #     "...\" + ($pathParts[-2..-1] -join '\')
-    # } else {
-    #     $currentPath
-    # }
-    
     Write-Host $displayPath -NoNewline -ForegroundColor Cyan
     
-    # Line 1: Git Status (using posh-git) - capture and display inline
+    # Line 1B: Virtual Environment (if active)
+    if ($env:VIRTUAL_ENV) {
+        $venvName = Split-Path $env:VIRTUAL_ENV -Leaf
+        Write-Host " ($venvName)" -NoNewline -ForegroundColor Green
+    }
+
+    # Line 1C: Git Status (using posh-git) - capture and display inline
     if (Get-Command Write-VcsStatus -ErrorAction SilentlyContinue) {
         $gitStatus = & $GitPromptScriptBlock
         if ($gitStatus) {
-            Write-Host " $gitStatus" -NoNewline
+            Write-Host "$gitStatus" -NoNewline
         }
     }
     
