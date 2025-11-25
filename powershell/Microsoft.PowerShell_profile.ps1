@@ -1,9 +1,16 @@
-# From the PowerShell command line:
-# PS C:\github> $PROFILE
-# C:\Users\{username}\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
-#
-# Source the latest PowerShell config:
-# PS C:\github> . $PROFILE
+# Import modules
+Import-Module posh-git
+
+# Configure posh-git prompt and settings
+$GitPromptSettings.EnableFileStatus = $true
+$GitPromptSettings.EnableStashStatus = $true
+$GitPromptSettings.ShowStatusWhenZero = $false
+$GitPromptSettings.AutoRefreshIndex = $true
+$GitPromptSettings.BeforeStatus = "["
+$GitPromptSettings.AfterStatus = "] "
+$GitPromptSettings.DefaultPromptSuffix = ""
+$GitPromptSettings.BranchBehindAndAheadDisplay = "Compact"
+$GitPromptSettings.RepositoriesInWhichToDisableFileStatus = @()
 
 # Configure PSReadLine for intuitive autocomplete with both history and path completion
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
@@ -34,3 +41,41 @@ function gll {
     git log --oneline -10 @args
 }
 
+# Custom multi-line prompt function
+function prompt {
+    $realLASTEXITCODE = $LASTEXITCODE
+    
+    # Line 1: Virtual Environment (if active)
+    if ($env:VIRTUAL_ENV) {
+        $venvName = Split-Path $env:VIRTUAL_ENV -Leaf
+        Write-Host "($venvName) " -NoNewline -ForegroundColor Green
+    }
+    
+    # # Line 1: Current Directory (abbreviated)
+    # $currentPath = $executionContext.SessionState.Path.CurrentLocation.Path
+    
+    # # Option B: Show only last 2 path segments
+    # $pathParts = $currentPath.Split([IO.Path]::DirectorySeparatorChar)
+    # $displayPath = if ($pathParts.Count -gt 2) {
+    #     "...\" + ($pathParts[-2..-1] -join '\')
+    # } else {
+    #     $currentPath
+    # }
+    
+    Write-Host $displayPath -NoNewline -ForegroundColor Cyan
+    
+    # Line 1: Git Status (using posh-git) - capture and display inline
+    if (Get-Command Write-VcsStatus -ErrorAction SilentlyContinue) {
+        $gitStatus = & $GitPromptScriptBlock
+        if ($gitStatus) {
+            Write-Host " $gitStatus" -NoNewline
+        }
+    }
+    
+    # Line 2: Prompt character
+    Write-Host ""  # New line
+    Write-Host ">" -NoNewline -ForegroundColor Yellow
+    
+    $global:LASTEXITCODE = $realLASTEXITCODE
+    return " "
+}
