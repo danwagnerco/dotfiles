@@ -73,8 +73,11 @@ function ped {
 # Custom multi-line prompt
 function prompt {
     $realLASTEXITCODE = $LASTEXITCODE
+
+    # Line 1A: blank line before prompt for visual separation
+    Write-Host ""
     
-    # Line 1A: Current Directory (last 3 segments)
+    # Line 2A: Current Directory (last 3 segments)
     $currentPath = $executionContext.SessionState.Path.CurrentLocation.Path
     $pathParts = $currentPath.Split([IO.Path]::DirectorySeparatorChar)
     $displayPath = if ($pathParts.Count -gt 3) {
@@ -84,13 +87,13 @@ function prompt {
     }
     Write-Host $displayPath -NoNewline -ForegroundColor Cyan
     
-    # Line 1B: Virtual Environment (if active)
+    # Line 2B: Virtual Environment (if active)
     if ($env:VIRTUAL_ENV) {
         $venvName = Split-Path $env:VIRTUAL_ENV -Leaf
         Write-Host " ($venvName)" -NoNewline -ForegroundColor Green
     }
 
-    # Line 1C: Git Status (using posh-git) - capture and display inline
+    # Line 2C: Git Status (using posh-git) - capture and display inline
     if (Get-Command Write-VcsStatus -ErrorAction SilentlyContinue) {
         $gitStatus = & $GitPromptScriptBlock
         if ($gitStatus) {
@@ -98,7 +101,7 @@ function prompt {
         }
     }
     
-    # Line 2: Prompt character
+    # Line 3: Prompt character
     Write-Host ""  # New line
     Write-Host ">" -NoNewline -ForegroundColor Yellow
     
