@@ -54,16 +54,21 @@ Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-sensible'
+Plug 'github/copilot.vim'
 Plug 'danwagnerco/tomorrow-theme', {'rtp': 'vim'}
 Plug 'zenorocha/dracula-theme', {'rtp': 'vim'}
 Plug 'tomasr/molokai'
 Plug 'altercation/vim-colors-solarized'
+Plug 'wincent/terminus'
+Plug 'cocopon/iceberg.vim'
 call plug#end()
 
 " Use colorscheme from package above
 " colorscheme Tomorrow-Night-Bright
+" set background=light
+" colorscheme solarized
 set background=light
-colorscheme solarized
+colorscheme iceberg
 
 " Settings
 syntax on
@@ -82,9 +87,14 @@ set directory=c:\tmp  " and temp files
 set noundofile        " as well as undo files
 set noerrorbells visualbell t_vb=
 let g:netrw_liststyle=3
-" set colorcolumn=80
+set colorcolumn=88
 " set guifont=Powerline\ Consolas:h10
-set guifont=JetBrains\ Mono:h9
+" set guifont=JetBrains\ Mono:h9
+" set guifont=JetBrainsMono\ Nerd\ Font:h9
+" set guifont=JetBrainsMono\ NF:h9
+" set guifont=UbuntuMono\ Nerd\ Font:h10
+let &guifont = 'UbuntuMono Nerd Font:h10'
+" let &guifont = 'JetBrainsMono Nerd Font Regular:h9' " does not work
 set encoding=utf-8
 let g:airline_powerline_fonts=1
 
