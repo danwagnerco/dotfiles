@@ -89,7 +89,14 @@ function prompt {
     
     # Line 2B: Virtual Environment (if active)
     if ($env:VIRTUAL_ENV) {
-        $venvName = Split-Path $env:VIRTUAL_ENV -Leaf
+        $venvLeaf = Split-Path $env:VIRTUAL_ENV -Leaf
+        if ($venvLeaf -eq '.venv') {
+            # uv-style: .venv inside project folder, show project name
+            $venvName = Split-Path (Split-Path $env:VIRTUAL_ENV -Parent) -Leaf
+        } else {
+            # poetry-style: descriptive venv name, use as-is
+            $venvName = $venvLeaf
+        }
         Write-Host " ($venvName)" -NoNewline -ForegroundColor Green
     }
 
