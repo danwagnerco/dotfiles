@@ -43,6 +43,17 @@ Set-PSReadLineOption -Colors @{
 function eee {
     eza -l -a -h @args
 }
+function etree {
+    param([int]$Depth)
+    
+    $baseArgs = '-l', '-a', '-h', '--no-permissions', '--no-filesize', '--no-user', '--no-time', '--no-git', '--tree', '--git-ignore', '--ignore-glob=.git', '--ignore-glob=.venv'
+    
+    if ($Depth -gt 0) {
+        eza @baseArgs --level=$Depth
+    } else {
+        eza @baseArgs
+    }
+}
 function gss {
     git status
 }
