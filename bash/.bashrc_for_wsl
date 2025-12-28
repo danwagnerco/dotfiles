@@ -252,6 +252,18 @@ ped() {
     fi
 }
 
+# Function to print tree views via eza
+etree() {
+    local depth=$1
+    local base_args=(-l -a -h --no-permissions --no-filesize --no-user --no-time --no-git --tree --git-ignore --ignore-glob='.git' --ignore-glob='.venv')
+    
+    if [[ -n "$depth" ]] && [[ "$depth" =~ ^[0-9]+$ ]]; then
+        eza "${base_args[@]}" --level="$depth"
+    else
+        eza "${base_args[@]}"
+    fi
+}
+
 # Environment variables
 export UW_TOKEN=<secret>
 export UW_API_TOKEN=<secret>
